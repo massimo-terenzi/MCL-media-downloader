@@ -1,0 +1,24 @@
+\name{download_multimedia}
+\alias{download_multimedia}
+\title{Download Multimedia Files from Meta Content Library}
+\description{
+This function downloads multimedia files from a list of URLs specified in a CSV file.
+}
+\usage{
+download_multimedia(csv_file, output_dir = "downloaded_multimedia")
+}
+\arguments{
+  \item{csv_file}{The path to the CSV file containing multimedia URLs.}
+  \item{output_dir}{The directory where the multimedia files will be saved. Default is "downloaded_multimedia".}
+}
+\value{
+A dataframe mapping the IDs from the CSV to the downloaded files.
+}
+\examples{
+\dontrun{
+download_multimedia("path/to/yourfile.csv", "downloaded_content")
+}
+}
+\author{
+Your Name
+}
