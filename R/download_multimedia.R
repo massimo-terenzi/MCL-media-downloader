@@ -29,6 +29,9 @@ download_multimedia <- function(csv_file, output_dir = "downloaded_multimedia", 
     cookies <- paste(cookies, collapse = "; ")
   }
   
+  # Define the User-Agent string
+  user_agent <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+  
   # Initialize a list to track downloaded files
   log_list <- list()
   
@@ -75,8 +78,8 @@ download_multimedia <- function(csv_file, output_dir = "downloaded_multimedia", 
           # Download the file
           tryCatch({
             if (!is.null(cookies)) {
-              # Include the cookies in the request header if provided
-              response <- GET(link, add_headers(Cookie = cookies))
+              # Include the cookies and User-Agent in the request header if provided
+              response <- GET(link, add_headers(Cookie = cookies, `User-Agent` = user_agent))
               if (status_code(response) == 200) {
                 writeBin(content(response, "raw"), file_name)
                 log_list[[length(log_list) + 1]] <- data.frame(id = file_id, file = file_name)
@@ -84,8 +87,14 @@ download_multimedia <- function(csv_file, output_dir = "downloaded_multimedia", 
                 warning(paste("Failed to download:", link, "-", status_code(response)))
               }
             } else {
-              download.file(link, file_name)
-              log_list[[length(log_list) + 1]] <- data.frame(id = file_id, file = file_name)
+              # Attempt download without cookies
+              response <- GET(link, add_headers(`User-Agent` = user_agent))
+              if (status_code(response) == 200) {
+                writeBin(content(response, "raw"), file_name)
+                log_list[[length(log_list) + 1]] <- data.frame(id = file_id, file = file_name)
+              } else {
+                warning(paste("Failed to download:", link, "-", status_code(response)))
+              }
             }
           }, error = function(e) {
             warning(paste("Error downloading:", link, "-", e$message))
