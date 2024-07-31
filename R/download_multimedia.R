@@ -34,6 +34,10 @@ download_multimedia <- function(csv_file, output_dir = "downloaded_multimedia") 
       # Parse the JSON content
       multimedia_list <- fromJSON(multimedia_json, flatten = TRUE)
       
+      # Debugging output: print structure of parsed JSON
+      print(paste("Row:", i))
+      str(multimedia_list)
+      
       # Ensure the result is a list of items
       if (!is.list(multimedia_list)) {
         warning(paste("Invalid JSON format in row:", i))
