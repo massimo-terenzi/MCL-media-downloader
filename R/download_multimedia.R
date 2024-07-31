@@ -34,54 +34,45 @@ download_multimedia <- function(csv_file, output_dir = "downloaded_multimedia") 
       # Parse the JSON content
       multimedia_list <- fromJSON(multimedia_json, flatten = TRUE)
       
-      # Debugging output: print structure of parsed JSON
-      print(paste("Row:", i))
-      str(multimedia_list)
-      
       # Ensure the result is a list of items
-      if (!is.list(multimedia_list)) {
+      if (!is.data.frame(multimedia_list)) {
         warning(paste("Invalid JSON format in row:", i))
         next
       }
       
-      # Iterate over each multimedia item in the parsed list
-      for (item in multimedia_list) {
-        # Ensure item is a list with named components
-        if (is.list(item) && !is.null(item$url)) {
-          link <- item$url
-          file_id <- item$id
-          file_type <- item$type
-          
-          # Determine the file extension from the URL, if possible
-          file_extension <- tools::file_ext(link)
-          
-          # Fallback to a generic extension if none can be determined
-          if (file_extension == "") {
-            if (file_type == "photo") {
-              file_extension <- "jpg"
-            } else if (file_type == "video") {
-              file_extension <- "mp4"
-            } else {
-              file_extension <- "dat" # Default extension if type is unknown
-            }
-          }
-          
-          # Check if the link is valid
-          if (!is.null(link) && !is.na(link) && nzchar(link)) {
-            file_name <- paste0(output_dir, "/", file_id, "_", file_type, ".", file_extension)
-            
-            # Download the file
-            tryCatch({
-              download.file(link, file_name)
-              log_list[[length(log_list) + 1]] <- data.frame(id = file_id, file = file_name)
-            }, error = function(e) {
-              warning(paste("Error downloading:", link, "-", e$message))
-            })
+      # Iterate over each row in the data.frame
+      for (j in 1:nrow(multimedia_list)) {
+        link <- multimedia_list[j, "url"]
+        file_id <- multimedia_list[j, "id"]
+        file_type <- multimedia_list[j, "type"]
+        
+        # Determine the file extension from the URL, if possible
+        file_extension <- tools::file_ext(link)
+        
+        # Fallback to a generic extension if none can be determined
+        if (file_extension == "") {
+          if (file_type == "photo") {
+            file_extension <- "jpg"
+          } else if (file_type == "video") {
+            file_extension <- "mp4"
           } else {
-            warning(paste("Invalid or missing link for ID:", file_id))
+            file_extension <- "dat" # Default extension if type is unknown
           }
+        }
+        
+        # Check if the link is valid
+        if (!is.null(link) && !is.na(link) && nzchar(link)) {
+          file_name <- paste0(output_dir, "/", file_id, "_", file_type, ".", file_extension)
+          
+          # Download the file
+          tryCatch({
+            download.file(link, file_name)
+            log_list[[length(log_list) + 1]] <- data.frame(id = file_id, file = file_name)
+          }, error = function(e) {
+            warning(paste("Error downloading:", link, "-", e$message))
+          })
         } else {
-          warning(paste("Invalid item structure in row:", i))
+          warning(paste("Invalid or missing link for ID:", file_id))
         }
       }
     } else {
