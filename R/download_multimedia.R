@@ -1,8 +1,9 @@
 #' Download Multimedia Files
 #'
-#' This function downloads multimedia files from a list of URLs specified in a CSV file.
+#' This function downloads multimedia files from a list of URLs specified in a CSV file. The CSV is obtained from the downloadable public data in the Meta Content Library (MCL) and contains URLs for various media items.
 #' @param csv_file The path to the CSV file containing multimedia URLs.
 #' @param output_dir The directory where the multimedia files will be saved.
+#' @param cookies_file The path to the cookies file used for authentication.
 #' @return A dataframe mapping the IDs from the CSV to the downloaded files.
 #' @export
 library(httr)
