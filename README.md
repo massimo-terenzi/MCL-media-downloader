@@ -28,6 +28,14 @@ library(jsonlite)
 
 After installing the package, you can use the `download_multimedia` function to download multimedia files from a CSV file containing URLs.
 
+### Authentication via Cookies
+
+To access protected content, such as media from Facebook, users need to provide authentication cookies. Here’s how to do it:
+
+	1.	Login to Facebook: log in to your Facebook account using your web browser.
+	2.	Export Cookies: Use a browser extension like “Cookie Monster” or similar to export your cookies. Save the cookies to a file in .txt format.
+	3.	Provide the Cookies File: Use the path to the cookies file as an argument in the download_multimedia function.
+
 ```r
 library(MCLdownloader)
 
