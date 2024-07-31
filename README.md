@@ -19,7 +19,7 @@ devtools::install_github("massimo-terenzi/MCL-media-downloader")
 After installing the package, you can use the `download_multimedia` function to download multimedia files from a CSV file containing URLs.
 
 ```r
-library(MCLDownloader)
+library(MCL-media-downloader)
 
 # Define the path to your CSV file and output directory
 csv_file <- "path/to/yourfile.csv"
