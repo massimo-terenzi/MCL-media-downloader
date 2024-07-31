@@ -36,6 +36,8 @@ To access protected content, such as media from Facebook, users need to provide 
 1. **export cookies**: Use a browser extension like “Cookie Monster” or similar to export your cookies. Save the cookies to a file in .txt format.
 1. **provide the cookies file**: Use the path to the cookies file as an argument in the download_multimedia function.
 
+### Example
+
 ```r
 library(MCLdownloader)
 
