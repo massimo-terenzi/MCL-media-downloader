@@ -1,0 +1,11 @@
+Package: MCLDownloader
+Type: Package
+Title: A Package to Download Multimedia Content from Meta Content Library
+Version: 0.1.0
+Authors@R: 
+    person("Massimo Terenzi", email = "massimo.terenzi@uniurb.it", role = c("aut", "cre"))
+Description: A package to download multimedia content from the Meta Content Library (MCL) and associate it with the original metadata.
+Depends: R (>= 3.5.0)
+License: MIT
+Encoding: UTF-8
+LazyData: true
