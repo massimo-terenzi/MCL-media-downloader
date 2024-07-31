@@ -14,14 +14,16 @@ install.packages("devtools")
 devtools::install_github("massimo-terenzi/MCLdownloader")
 ```
 
-You also will need the library `jsonlite`:
+You also will need the libraries `jsonlite` and `httr`:
 
 ```r
-# Install jsonlite if you haven't already
+# Install jsonlite and httr if you haven't already
 install.packages("devtools")
+install.packages("httr")
 
 # Load jsonlite
 library(jsonlite)
+library(httr)
 ```
 
 ## Usage
