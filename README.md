@@ -11,7 +11,7 @@ To install the package, you can use the `devtools` package to install it directl
 install.packages("devtools")
 
 # Install MCLDownloader from GitHub
-devtools::install_github("massiterenzi/MCL-media-downloader")
+devtools::install_github("massimo-terenzi/MCL-media-downloader")
 ```
 
 ## Usage
