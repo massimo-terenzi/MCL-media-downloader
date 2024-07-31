@@ -1,5 +1,5 @@
 library(testthat)
-library(MCLdownloader)
+library(MCLMediaDownloader)
 
 test_that("download_multimedia works as expected", {
   # Path to a sample CSV file (replace with a valid path for actual tests)
