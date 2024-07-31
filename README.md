@@ -14,7 +14,7 @@ install.packages("devtools")
 devtools::install_github("massimo-terenzi/MCLdownloader")
 ```
 
-You also will need to load the library `jsonlite`:
+You also will need the library `jsonlite`:
 
 ```r
 # Install jsonlite if you haven't already
@@ -40,6 +40,7 @@ To access protected content, such as media from Facebook, users need to provide 
 
 ```r
 library(MCLdownloader)
+library(jsonlite)
 
 # Define the path to your CSV file and output directory
 csv_file <- "path/to/yourfile.csv"
