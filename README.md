@@ -1,6 +1,6 @@
-# MCLdownloader
+# MCLMediaDownloader
 
-MCLdownloader is an R package designed to download multimedia content from the Meta Content Library (MCL) downloadable public data and associate it with the original metadata.
+MCLMediaDownloader is an R package designed to download multimedia content from the Meta Content Library (MCL) downloadable public data and associate it with the original metadata.
 
 ## Installation
 
@@ -11,7 +11,7 @@ To install the package, you can use the `devtools` package to install it directl
 install.packages("devtools")
 
 # Install MCLDownloader from GitHub
-devtools::install_github("massimo-terenzi/MCLdownloader")
+devtools::install_github("massimo-terenzi/MCLMediaDownloader")
 ```
 
 You also will need the libraries `jsonlite` and `httr`:
@@ -41,7 +41,7 @@ To access protected content, such as media from Facebook, users need to provide 
 ### Example
 
 ```r
-library(MCLdownloader)
+library(MCLMediaDownloader)
 library(jsonlite)
 
 # Define the path to your CSV file and output directory
@@ -58,7 +58,7 @@ print(log_df)
 
 ### Arguments
 
-* csv_file: the path to the CSV file that contains the multimedia URLs. This file should have at least two columns: one for the IDs (id) and one for the URLs (Multimedia).
+* csv_file: the path to the CSV file that contains the multimedia URLs. This file should have at least two columns: one for the IDs (id) and one for the URLs (multimedia).
 * output_dir: the directory where the downloaded files will be saved. The default is "downloaded_multimedia".
 
 ## Example
