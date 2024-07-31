@@ -5,9 +5,10 @@
 #' @param output_dir The directory where the multimedia files will be saved.
 #' @return A dataframe mapping the IDs from the CSV to the downloaded files.
 #' @export
+library(httr)
 library(jsonlite)
 
-download_multimedia <- function(csv_file, output_dir = "downloaded_multimedia") {
+download_multimedia <- function(csv_file, output_dir = "downloaded_multimedia", cookies_file = NULL) {
   # Load the CSV file
   data <- read.csv(csv_file)
   
@@ -19,6 +20,13 @@ download_multimedia <- function(csv_file, output_dir = "downloaded_multimedia") 
   # Create the output directory if it doesn't exist
   if (!dir.exists(output_dir)) {
     dir.create(output_dir)
+  }
+  
+  # Load cookies if provided
+  cookies <- NULL
+  if (!is.null(cookies_file)) {
+    cookies <- readLines(cookies_file)
+    cookies <- paste(cookies, collapse = "; ")
   }
   
   # Initialize a list to track downloaded files
@@ -66,8 +74,19 @@ download_multimedia <- function(csv_file, output_dir = "downloaded_multimedia") 
           
           # Download the file
           tryCatch({
-            download.file(link, file_name)
-            log_list[[length(log_list) + 1]] <- data.frame(id = file_id, file = file_name)
+            if (!is.null(cookies)) {
+              # Include the cookies in the request header if provided
+              response <- GET(link, add_headers(Cookie = cookies))
+              if (status_code(response) == 200) {
+                writeBin(content(response, "raw"), file_name)
+                log_list[[length(log_list) + 1]] <- data.frame(id = file_id, file = file_name)
+              } else {
+                warning(paste("Failed to download:", link, "-", status_code(response)))
+              }
+            } else {
+              download.file(link, file_name)
+              log_list[[length(log_list) + 1]] <- data.frame(id = file_id, file = file_name)
+            }
           }, error = function(e) {
             warning(paste("Error downloading:", link, "-", e$message))
           })
