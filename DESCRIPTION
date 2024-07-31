@@ -1,4 +1,4 @@
-Package: MCLdownloader
+Package: MCLMediaDownloader
 Type: Package
 Title: A Package to Download Multimedia Content from Meta Content Library
 Version: 0.1.0
