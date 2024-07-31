@@ -11,7 +11,17 @@ To install the package, you can use the `devtools` package to install it directl
 install.packages("devtools")
 
 # Install MCLDownloader from GitHub
-devtools::install_github("massimo-terenzi/MCL-media-downloader")
+devtools::install_github("massimo-terenzi/MCLdownloader")
+```
+
+You also will need to load the library `jsonlite`:
+
+```r
+# Install jsonlite if you haven't already
+install.packages("devtools")
+
+# Load jsonlite
+library(jsonlite)
 ```
 
 ## Usage
@@ -19,11 +29,12 @@ devtools::install_github("massimo-terenzi/MCL-media-downloader")
 After installing the package, you can use the `download_multimedia` function to download multimedia files from a CSV file containing URLs.
 
 ```r
-library(MCL-media-downloader)
+library(MCLdownloader)
 
 # Define the path to your CSV file and output directory
 csv_file <- "path/to/yourfile.csv"
 output_dir <- "downloaded_content"
+cookies_file <- "path/to/cookies.txt"
 
 # Download the multimedia content
 log_df <- download_multimedia(csv_file, output_dir)
