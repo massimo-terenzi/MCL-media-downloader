@@ -1,6 +1,6 @@
-# MCL-media-downloader
+# MCLdownloader
 
-MCL-media-downloader is an R package designed to download multimedia content from the Meta Content Library (MCL) and associate it with the original metadata.
+MCLdownloader is an R package designed to download multimedia content from the Meta Content Library (MCL) downloadable public data and associate it with the original metadata.
 
 ## Installation
 
@@ -28,7 +28,7 @@ library(httr)
 
 ## Usage
 
-After installing the package, you can use the `download_multimedia` function to download multimedia files from a CSV file containing URLs.
+After installing the package, you can use the `download_multimedia` function to download multimedia files from the CSV file provided by the MCL User Interface, containing URLs to multimedia resources.
 
 ### Authentication via Cookies
 
