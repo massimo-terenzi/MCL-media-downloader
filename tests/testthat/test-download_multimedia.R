@@ -1,5 +1,5 @@
 library(testthat)
-library(MultimediaDownloader)
+library(MCLdownloader)
 
 test_that("download_multimedia works as expected", {
   # Test with a sample CSV file
